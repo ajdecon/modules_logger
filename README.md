@@ -10,15 +10,16 @@ a good excuse. :)
 Logs all "module" commands, and keeps a running tally of how many times each
 module is loaded by a given user. Uses MongoDB for persistence. Requires pymongo.
 
-To install:
-* Install and start MongoDB, and install pymongo. "yum install pymongo mongodb" 
-should do it.
+## To install: ##
+* Install and start MongoDB, and install pymongo. The relevant packages are in 
+the EPEL repository for EL6: installing "mongodb", "mongodb-server", and 
+"pymongo" should be sufficient.
 * Put modules_logger and modules_usage into the PATH on your nodes (/usr/local/bin, 
 for example)
 * Put modules_logger.conf into /etc/.
 * Replace /etc/profile.d/modules.sh with the modules.sh provided here.
 
-TODO:
+## TODO: ##
 * Add support for csh/tcsh
 * Add additional reporting functions besides "how many times user X 
 loaded each module"
