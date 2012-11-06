@@ -4,6 +4,7 @@ import sys
 import pymongo
 import datetime
 import re
+import ConfigParser
 
 def print_usage():
     print "USAGE:   %s username operation [modulename]" % (sys.argv[0])
@@ -25,8 +26,13 @@ else:
     modulename = ""
 
 # Set up DB connection
-connection = pymongo.Connection('localhost',27017)
-db = connection.modules_log
+Config = ConfigParser.ConfigParser()
+Config.read("/etc/modules_logger.conf")
+server=Config.get("mongodb","server")
+port=Config.get("mongodb","port")
+dbname=Config.get("mongodb","db")
+connection = pymongo.Connection(server,int(port))
+db = connection[dbname]
 users = db.users
 logs = db.logs
 

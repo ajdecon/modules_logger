@@ -3,6 +3,7 @@ import pymongo
 import sys
 import os
 import re
+import ConfigParser
 
 def print_usage():
     print "USAGE: %s [username]"
@@ -18,8 +19,13 @@ else:
     username=os.environ['USER'].lower()
 
 # Set up DB connection
-connection = pymongo.Connection('localhost',27017)
-db = connection.modules_log
+Config = ConfigParser.ConfigParser()
+Config.read("/etc/modules_logger.conf")
+server=Config.get("mongodb","server")
+port=Config.get("mongodb","port")
+dbname=Config.get("mongodb","db")
+connection = pymongo.Connection(server,int(port))
+db = connection[dbname]
 users = db.users
 
 u = users.find_one({"username":username})
