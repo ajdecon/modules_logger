@@ -3,9 +3,15 @@
 import sys
 import pymongo
 import datetime
+import re
 
 def print_usage():
     print "USAGE:   %s username operation [modulename]" % (sys.argv[0])
+
+# mongodb keys can't contain dots
+# POTENTIALLY BAD ASSUMPTION: module names won't contain commas
+def encode_dots(key):
+    return re.sub(r'\.',',',key)
 
 # Get command line arguments
 if len(sys.argv)<2:
@@ -14,7 +20,7 @@ if len(sys.argv)<2:
 username = sys.argv[1].lower()
 operation = sys.argv[2].lower()
 if len(sys.argv)==4:
-    modulename = sys.argv[3]
+    modulename = encode_dots(sys.argv[3])
 else:
     modulename = ""
 
@@ -28,7 +34,7 @@ logs = db.logs
 now = datetime.datetime.utcnow()
 l = { "username": username,
       "operation": operation,
-      "modulename": modulename,
+      "args": ' '.join(sys.argv[3:]),
       "date": now }
 logs.insert(l)
 
@@ -41,7 +47,6 @@ if operation=="load":
         u_new = { "username": username }
         users.insert(u_new)
         u = users.find_one({"username": username})
-
     try:
         u[modulename]["count"]+=1
     except KeyError:
