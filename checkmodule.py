@@ -19,12 +19,12 @@ users = db.users
 
 u = users.find_one({"username":username})
 if u:
-    print "Module                      Count       Last loaded"
-    print "======                      =====       ==========="
+    print "Module                                      Count       Last loaded"
+    print "======                                      =====       ==========="
     for k in u:
         if k=="username" or k=="_id": 
             continue
-        print "%-28s  %3d       %s" % (k, u[k]['count'],u[k]['last_loaded'].strftime("%d %h %Y"))
+        print "%-44s  %3d       %s" % (k, u[k]['count'],u[k]['last_loaded'].strftime("%d %h %Y"))
 else:
     print "No module usage found for %s" % (username)
     sys.exit(1)
