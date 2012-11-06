@@ -4,12 +4,15 @@ modules_logger
 Inspired by Jeff Layton's article on logging usage of environment modules,
 http://hpc.admin-magazine.com/Articles/Gathering-Data-on-Environment-Modules,
 and by Harvard's modules-usage project, https://github.com/fasrc/module-usage.
+Also, I wanted to learn MongoDB, and data persistence for this project was
+a good excuse. :)
 
 Logs all "module" commands, and keeps a running tally of how many times each
 module is loaded by a given user. Uses MongoDB for persistence. Requires pymongo.
 
 To install:
-* Install and start MongoDB, and install pymongo. :)
+* Install and start MongoDB, and install pymongo. "yum install pymongo mongodb" 
+should do it.
 * Put modules_logger and modules_usage into the PATH on your nodes (/usr/local/bin, 
 for example)
 * Put modules_logger.conf into /etc/.
