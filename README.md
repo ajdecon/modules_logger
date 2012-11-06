@@ -1,4 +1,4 @@
-environment_modules_logger
+modules_logger
 ==========================
 
 Inspired by Jeff Layton's article on logging usage of environment modules,
@@ -9,7 +9,7 @@ Logs all "module" commands, and keeps a running tally of how many times each
 module is loaded by a given user. Uses MongoDB for persistence. Requires pymongo.
 
 To install:
-* Put logmodule and modules_usage into the PATH on your nodes (/usr/local/bin, 
+* Put modules_logger and modules_usage into the PATH on your nodes (/usr/local/bin, 
 for example)
 * Replace /etc/profile.d/modules.sh with the modules.sh provided here.
 

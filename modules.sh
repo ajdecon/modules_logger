@@ -8,5 +8,5 @@ fi
 
 # modules_logger
 # Override the real module function
-module() { ARGS=$*; logmodule $USER $ARGS; eval `/usr/bin/modulecmd sh $ARGS`; }
+module() { ARGS=$*; modules_logger $USER $ARGS; eval `/usr/bin/modulecmd sh $ARGS`; }
 export -f module
