@@ -43,9 +43,11 @@ if operation=="load":
         u = users.find_one({"username": username})
 
     try:
-        u[modulename]+=1
+        u[modulename]["count"]+=1
     except KeyError:
-        u[modulename]=1
+        u[modulename] = {"count":1}
+#        u[modulename]["count"]=1
+    u[modulename]["last_loaded"]=now
     users.save(u)
 
 
