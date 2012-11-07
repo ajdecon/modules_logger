@@ -13,10 +13,11 @@ module is loaded by a given user. Uses MongoDB for persistence. Requires pymongo
 ## To install: ##
 * Install and start MongoDB, and install pymongo. The relevant packages are in 
 the EPEL repository for EL6: installing "mongodb", "mongodb-server", and 
-"pymongo" should be sufficient.
+"pymongo" should be sufficient. The default configuration binds to 127.0.0.1, so 
+you may want to adjust the configuration to expose to other cluster nodes.
 * Put modules_logger and modules_usage into the PATH on your nodes (/usr/local/bin, 
 for example)
-* Put modules_logger.conf into /etc/.
+* Put modules_logger.conf into /etc/, and edit the config appropriately.
 * Replace /etc/profile.d/modules.sh with the modules.sh provided here.
 
 ## TODO: ##
