@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Modules logger by ajdecon</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Modules logger</h1>
+        <p class="header">Log user activity for environment modules to MongoDB</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/ajdecon/modules_logger/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/ajdecon/modules_logger/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/ajdecon/modules_logger">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/ajdecon">ajdecon</a></p>
+
+
+      </header>
+      <section>
+        <h1>modules_logger</h1>
+
+<p>Inspired by Jeff Layton's article on logging usage of environment modules,
+<a href="http://hpc.admin-magazine.com/Articles/Gathering-Data-on-Environment-Modules">http://hpc.admin-magazine.com/Articles/Gathering-Data-on-Environment-Modules</a>,
+and by Harvard's modules-usage project, <a href="https://github.com/fasrc/module-usage">https://github.com/fasrc/module-usage</a>.
+Also, I wanted to learn MongoDB, and data persistence for this project was
+a good excuse. :)</p>
+
+<p>Logs all "module" commands, and keeps a running tally of how many times each
+module is loaded by a given user. Uses MongoDB for persistence. Requires pymongo.</p>
+
+<h2>To build and install an RPM (preferred)</h2>
+
+<ol>
+<li><code>python setup.py bdist_rpm</code></li>
+<li><code>sudo yum localinstall dist/modules-logger-0.1-1.noarch.rpm</code></li>
+</ol><h2>To install by hand:</h2>
+
+<ul>
+<li>Install and start MongoDB, and install pymongo. The relevant packages are in 
+the EPEL repository for EL6: installing "mongodb", "mongodb-server", and 
+"pymongo" should be sufficient. The default configuration binds to 127.0.0.1, so 
+you may want to adjust the configuration to expose to other cluster nodes.</li>
+<li>Put modules_logger and modules_usage into the PATH on your nodes (/usr/local/bin, 
+for example)</li>
+<li>Put modules_logger.conf into /etc/, and edit the config appropriately.</li>
+<li>Replace /etc/profile.d/modules.sh with the modules.sh.logger provided here.</li>
+</ul><h2>TODO:</h2>
+
+<ul>
+<li>Add support for csh/tcsh</li>
+<li>Add additional reporting functions besides "how many times user X 
+loaded each module"</li>
+<li>Detect failed loads?</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-12576607-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
