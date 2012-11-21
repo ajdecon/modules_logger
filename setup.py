@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name="modules-logger",
-      version='0.1',
+      version='0.1.1',
       description="Log usage of environment-modules to MongoDB",
       author="Adam DeConinck",
       author_email="ajdecon@ajdecon.org",

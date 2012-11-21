@@ -26,16 +26,18 @@ else:
     modulename = ""
 
 # Set up DB connection
-Config = ConfigParser.ConfigParser()
-Config.read("/etc/modules_logger.conf")
-server=Config.get("mongodb","server")
-port=Config.get("mongodb","port")
-dbname=Config.get("mongodb","db")
-connection = pymongo.Connection(server,int(port))
-db = connection[dbname]
-users = db.users
-logs = db.logs
-
+try:
+    Config = ConfigParser.ConfigParser()
+    Config.read("/etc/modules_logger.conf")
+    server=Config.get("mongodb","server")
+    port=Config.get("mongodb","port")
+    dbname=Config.get("mongodb","db")
+    connection = pymongo.Connection(server,int(port))
+    db =  connection[dbname]
+    users = db.users
+    logs = db.logs
+except:
+    sys.exit(1)
 # Log the request
 now = datetime.datetime.utcnow()
 l = { "username": username,
