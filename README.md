@@ -11,6 +11,8 @@ Logs all "module" commands, and keeps a running tally of how many times each
 module is loaded by a given user. Uses MongoDB for persistence. Requires pymongo.
 
 ## To build and install an RPM (preferred) ##
+0. To build the man pages into the RPM, add the following line to ~/.rpmmacros:
+    `%__os_install_post %{nil}`
 1. `python setup.py bdist_rpm`
 2. `sudo yum localinstall dist/modules-logger-0.1-1.noarch.rpm`
 

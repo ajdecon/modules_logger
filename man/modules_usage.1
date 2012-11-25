@@ -1,0 +1,38 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "MODULES_USAGE" "1" "November 2012" "" ""
+.
+.SH "NAME"
+\fBmodules_usage\fR \- displays usage information for environment modules
+.
+.SH "SYNOPSIS"
+\fBmodules_usage\fR [\fIusername\fR]
+.
+.SH "DESCRIPTION"
+modules_usage displays usage information for environment modules recorded by modules_logger(1)\. For a given user, it lists all the modules which have been loaded, how many times each module was loaded, and the date each module was last loaded by that user\. The module names are the names which were used in the "module load" command, not the full module name which was loaded\.
+.
+.P
+If no username is specialized, displays usage information for the current user\.
+.
+.SH "EXAMPLES"
+.
+.nf
+
+[ajdecon@exp ~]$ modules_usage
+Module                                      Count       Last loaded
+======                                      =====       ===========
+python/2\.7\.3                                    1       07 Nov 2012
+mpi/openmpi/1\.6\.2                               1       06 Nov 2012
+gcc/4\.7\.2                                       1       06 Nov 2012
+golang/1\.0\.3                                    2       06 Nov 2012
+python/3\.2\.3                                    2       06 Nov 2012
+ruby                                            2       21 Nov 2012
+.
+.fi
+.
+.SH "AUTHOR"
+Adam DeConinck \fIajdecon@ajdecon\.org\fR
+.
+.SH "SEE ALSO"
+modules_logger(1)

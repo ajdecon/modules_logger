@@ -2,4 +2,7 @@ modules_logger
 modules_usage
 modules_logger.conf
 modules.sh.logger
+man/modules_logger.1
+man/modules_logger.5
+man/modules_usage.1
 setup.py
