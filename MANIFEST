@@ -1,5 +1,6 @@
 modules_logger
 modules_usage
+modules_stats
 modules_logger.conf
 modules.sh.logger
 man/modules_logger.1

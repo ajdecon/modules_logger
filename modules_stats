@@ -1,0 +1,61 @@
+#!/usr/bin/python
+import pymongo
+import sys
+import os
+import re
+import ConfigParser
+import argparse
+from bson.code import Code
+
+def decode_dots(key):
+    return re.sub(r',','.',key)
+
+ap = argparse.ArgumentParser()
+ap.add_argument("--sort-by-dates","-d",dest="dates",action="store_true",required=False,default=False,
+    help="Sort statistics by last-loaded")
+ap.add_argument("--show-users","-u",dest="users",action="store_true",required=False,default=False,
+    help="Show a user list for each module")
+args = ap.parse_args()
+
+# Set up DB connection
+Config = ConfigParser.ConfigParser()
+Config.read("/etc/modules_logger.conf")
+server=Config.get("mongodb","server")
+port=Config.get("mongodb","port")
+dbname=Config.get("mongodb","db")
+connection = pymongo.Connection(server,int(port))
+db = connection[dbname]
+users = db.users
+
+totals = {}
+last_used = {}
+user_list = {}
+
+for u in users.find():
+    for k in u:
+        if k=="username" or k=="_id":
+            continue
+        try:
+            totals[k]+=u[k]['count']
+            user_list[k].add(u['username'])
+        except KeyError:
+            totals[k]=u[k]['count']
+            user_list[k] = set()
+            user_list[k].add(u['username'])
+        
+        try:
+            if last_used[k] < u[k]['last_loaded']:
+                last_used[k] = u[k]['last_loaded']
+        except KeyError:
+            last_used[k] = u[k]['last_loaded']
+
+if args.dates:
+    sorter = lambda x: last_used[x]
+else:
+    sorter = lambda x: totals[x]
+
+for k in sorted(totals, key=sorter, reverse=True):
+    print "%44s  %4d  %s" % (decode_dots(k), totals[k], last_used[k].strftime("%d %h %Y"))
+    if args.users:
+        print ','.join(user_list[k]) + "\n"
+
